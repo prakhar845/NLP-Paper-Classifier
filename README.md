@@ -1,16 +1,18 @@
 # Multi-Label Text Classification of Scientific Papers
 
 ## Project Overview
-This project develops a deep learning system to automatically assign multiple subject categories (e.g., cs.AI, cs.LG) to scientific papers using only the text from their abstracts. The project demonstrates skills in Natural Language Processing (NLP), from classical machine learning baselines to more advanced deep learning architectures. The final model is deployed in a simple, interactive web application.
+In the age of information, the rapid growth of scientific literature presents a significant challenge: how can we efficiently organize and navigate this vast sea of knowledge? This project addresses this challenge by developing an intelligent system to automatically classify scientific papers into multiple subject categories using only the text from their abstracts.
 
-### Technical Skills
+This repository documents an end-to-end Natural Language Processing (NLP) solution, starting with a classical machine learning baseline and advancing to a more sophisticated deep learning architecture. The final, high-performing model is deployed as a simple, interactive web application, demonstrating a complete workflow from raw data to a practical, real-world tool.
+
+### Technology Stack
 1. **Languages & Libraries:** Python, Pandas, NLTK, Scikit-learn, TensorFlow, Keras, Gradio
 2. **Techniques:** Text Preprocessing, TF-IDF Vectorization, Multi-Label Classification, Deep Learning
 3. **Models:** Logistic Regression (Baseline), Long Short-Term Memory (LSTM) Network
 4. **Deployment:** Gradio for creating an interactive web UI
 
 ### Project Structure
-Multi-Label_Text_Classification/
+NLP_Paper_Classifier/
 |
 |-- tcs_env/                  # Virtual environment (ignored by Git)
 |-- arxiv_data.csv            # Raw data file (ignored by Git)
@@ -21,20 +23,27 @@ Multi-Label_Text_Classification/
 |-- app.py                    # Python script for the Gradio web application
 |-- .gitignore                # Specifies files to be ignored by Git
 |-- README.md                 # This file
+|-- requirements.txt          # List of Python dependencies
 
 ### Methodology
-1. **Data Preprocessing:** The raw text from over 50,000 paper abstracts was cleaned by converting to lowercase, removing punctuation, and filtering out stopwords. The category labels were transformed into a multi-hot encoded binary format using Scikit-learn's MultiLabelBinarizer.
+The project was executed through a structured, five-step process, ensuring a robust and well-evaluated final product.
 
-2. **Baseline Model:** A baseline was established using a TF-IDF vectorizer to convert text into numerical features, followed by a OneVsRestClassifier wrapping a LogisticRegression model. This provided a benchmark F1-score to measure against.
+1. **Data Preprocessing:** The foundation of any NLP model is clean, well-structured data. The model was trained on a dataset of over 50,000 scientific paper abstracts from arXiv. The raw text was meticulously cleaned by converting it to lowercase, removing punctuation and common English stopwords, and tokenizing it for the model. A critical step for this multi-label task was transforming the categorical labels (e.g., cs.AI, cs.LG) into a multi-hot encoded binary format using Scikit-learn's MultiLabelBinarizer, making them suitable for training.
 
-3. **Deep Learning Model:** An advanced model was built using a Keras Sequential architecture, including: 
-   1. An Embedding layer to learn dense vector representations of words.
-   2. An LSTM layer to process the sequence of words and capture contextual information.
-   3. A final Dense output layer with a sigmoid activation function to handle the multi-label predictions.
+2. **Baseline Model:** To properly evaluate the effectiveness of a deep learning approach, it's essential to first establish a benchmark. A baseline model was created using classical machine learning techniques:
+   
+  1. **TF-IDF Vectorization:** Text was converted into numerical features representing the importance of each word.
+  2. **OneVsRest Classifier:** This strategy allowed a binary classifier (Logistic Regression) to be used for the multi-label problem by training one classifier per label. This baseline provided a solid F1-score to measure against, ensuring that the more complex deep learning model offered a significant performance improvement.
+     
+3. **Advanced Model Architecture (LSTM)** To capture the nuanced meaning and contextual relationships within the abstracts, an advanced model was built using a Long Short-Term Memory (LSTM) network, a type of Recurrent Neural Network (RNN) perfectly suited for sequential data like text. The Keras model architecture consists of:
 
-4. **Evaluation:** The models were evaluated using the micro-averaged F1-score, a suitable metric for multi-label classification tasks. The deep learning model showed a significant performance improvement over the baseline.
+   1. **An Embedding Layer:** Converts words into dense numerical vectors, capturing semantic relationships.
+   2. **An LSTM Layer:** Processes the sequence of word vectors, learning long-range dependencies and the contextual flow of the text.
+   3. **A Dense Output Layer:** Uses a sigmoid activation function to output a probability score for each possible category, allowing a single abstract to be assigned multiple labels.
 
-5. **Deployment:** The trained Keras model and its associated preprocessing objects (Tokenizer, MultiLabelBinarizer) were saved. A simple web application was built using the Gradio library, allowing users to paste an abstract and receive real-time category predictions.
+4. **Performance Evaluation** The models were rigorously evaluated using the micro-averaged F1-score, a metric well-suited for multi-label classification tasks, especially those with potential class imbalance. As hypothesized, the LSTM model's ability to understand context and word order resulted in a significant performance improvement over the TF-IDF baseline, confirming the value of a deep learning approach for this task.
+
+6. **Deployment as an Interactive Web App** A model's true utility is realized when it can be easily used. The final step of this project was to deploy the trained LSTM model into a practical, interactive web application. Using the Gradio library, a simple user interface was created that allows anyone—researchers, students, or librarians—to paste in a scientific abstract and receive instant, real-time category predictions. This demonstrates the full end-to-end lifecycle, from raw data to a tangible, deployed AI tool.
 
 ### How to Run
 **Clone the repository:**
@@ -47,8 +56,6 @@ cd NLP-Paper-Classifier
 python -m venv tcs_env
 source tcs_env/bin/activate  # On Windows: tcs_env\Scripts\activate
 pip install -r requirements.txt
-
-**(Note: Create a requirements.txt file by running pip freeze > requirements.txt in your activated environment.)**
 
 1. **Download the data:** Download the "ArXiv Paper Abstracts" dataset from Kaggle and place arxiv_data.csv in the root directory.
 
