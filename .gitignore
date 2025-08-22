@@ -1,0 +1,43 @@
+# Python virtual environment
+tcs_env/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE and editor specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Operating System generated files
+.DS_Store
+Thumbs.db
+
+# Datasets
+*.csv
+
+# Files from the problem statement
+arxiv_data.csv
+
+# Machine Learning Models and Outputs
+*.pkl
+*.joblib
+*.h5
+*.model
+
+mlb.pickle
+tokenizer.pickle
+arxiv_classifier_model.h5
+
+# Log files
+*.log
+
+# Temporary files
+*~

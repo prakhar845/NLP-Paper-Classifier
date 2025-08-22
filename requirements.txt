@@ -1,0 +1,11 @@
+gradio==5.43.1
+matplotlib==3.10.5
+seaborn==0.13.2
+nltk==3.9.1
+pandas==2.3.2
+scikit-learn==1.7.1
+tensorflow==2.20.0
+keras==3.11.2
+pickle==0.0.12
+numpy==2.3.2
+joblib==1.5.1
